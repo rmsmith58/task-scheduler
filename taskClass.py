@@ -17,5 +17,5 @@ class task:
         return self.remind
 
     def display(self):
-        print('%s %s %s' % (self.getName, self.getDate, self.getRemind))
+        return '%s %s %s' % (self.getName(), self.getDate(), self.getRemind())
         

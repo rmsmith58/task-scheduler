@@ -7,15 +7,50 @@ def writeTask(title, date, remind):
     tempTask = t.task(title, date, remind)
     p.dump(tempTask, open(('tasks\%s.p' % tempTask.getName()), 'wb'))
     
-#returns list of all task objects in folder
-def readTask(date):
-    output = []
+#printd all tasks wirh matching due date
+def readTaskDate(date):
+    output = ''
     files = os.listdir('tasks')
     for filename in files:
         temp = p.load(open('tasks\%s' % filename, 'rb'))
-        output.append(temp)
-    return output
-        
+        if temp.getDate() == date:
+            output += temp.display()
+            output += '\n'
+    if output == '':
+        output += 'No matching tasks found'
+    else:
+        output = 'Found tasks:\n' + output    
+    print(output + '--------')
+
+#prints all tasks with matching reminder date
+def readTaskRemind(reminder):
+    output = ''
+    files = os.listdir('tasks')
+    for filename in files:
+        temp = p.load(open('tasks\%s' % filename, 'rb'))
+        if temp.getRemind() == reminder:
+            output += temp.display()
+            output += '\n'
+    if output == '':
+        output += 'No matching tasks found'
+    else:
+        output = 'Found tasks:\n' + output
+    print(output + '--------')
+
+#prints all tasks with matching name
+def readTaskName(name):
+    output = ''
+    files = os.listdir('tasks')
+    for filename in files:
+        temp = p.load(open('tasks\%s' % filename, 'rb'))
+        if temp.getName() == name:
+            output += temp.display()
+            output += '\n'
+    if output == '':
+        output += 'No matching tasks found'
+    else:
+        output = 'Found tasks:\n' + output
+    print(output + '--------')
 
 #print list of commands
 def printHelp():
@@ -37,10 +72,15 @@ def addTask():
 
     print('Task added successfully\n--------')
     
-#run readTask with date input
+#run readTask with given search parameter and term
 def searchTask():
-    print('Enter date to search (MM/DD/YYYY)')
-    date = input('DATE>')
-
-    print('%s\n--------' % readTask(date))
-    
+    print('Enter search parameter: Name, date, or reminder')
+    key = input('PARAMETER>')
+    if key.lower() == 'name':
+        readTaskName(input('Enter search term\nNAME>'))
+    elif key.lower() == 'date':
+        readTaskDate(input('Enter search term\nDATE>'))
+    elif key.lower() == 'reminder':
+        readTaskRemind(input('Enter search term\nREMINDER>'))
+    else:
+        print('Unrecognized search parameter')
