@@ -3,13 +3,13 @@ import os
 import taskClass as t
 import random
 
-#write task class to file
+#write task class to file with random name
 def writeTask(title, date, remind):
     random.seed()
     tempTask = t.task(title, date, remind)
     p.dump(tempTask, open(('tasks\%s.p' % random.randrange(999999999999)), 'wb'))
     
-#printd all tasks wirh matching due date
+#returns list of tasks with matching date value
 def readTaskDate(date):
     output = ['Name:   Date:   Category:']
     files = os.listdir('tasks')
@@ -21,7 +21,7 @@ def readTaskDate(date):
         output.append('No matching tasks found')
     return output    
 
-#prints all tasks with matching reminder date
+#returns list of tasks with matching category value
 def readTaskCategory(category):
     output = ['Name:   Date:   Category:']
     files = os.listdir('tasks')
@@ -33,7 +33,7 @@ def readTaskCategory(category):
         output.append('No matching tasks found')
     return output
 
-#prints all tasks with matching name
+#returns list of tasks with matching name value
 def readTaskName(name):
     output = ['Name:   Date:   Category:']
     files = os.listdir('tasks')
