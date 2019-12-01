@@ -22,6 +22,9 @@ The program will then search each saved task object and return a list of matchin
 
 Any returned values from the search will be listed in the search output section.
 
-
+The tasks folder already contains an example task, this can be manually deleted if desired. To see it, search with the information below:
+Name: Example task 
+Date: 12/1/2019
+Category: CSCI 101
 
 
