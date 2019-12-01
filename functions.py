@@ -23,12 +23,12 @@ def readTaskDate(date):
     print(output + '--------')
 
 #prints all tasks with matching reminder date
-def readTaskRemind(reminder):
+def readTaskCategory(category):
     output = ''
     files = os.listdir('tasks')
     for filename in files:
         temp = p.load(open('tasks\%s' % filename, 'rb'))
-        if temp.getRemind() == reminder:
+        if temp.getCategory() == category:
             output += temp.display()
             output += '\n'
     if output == '':

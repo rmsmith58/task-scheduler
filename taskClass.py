@@ -1,11 +1,11 @@
 class task:
     name = ''
     date = ''
-    remind = ''
-    def __init__(self, title, date, remind):
+    category = ''
+    def __init__(self, title, date, category):
         self.name = title
         self.date = date
-        self.remind = remind
+        self.category = category
 
     def getName(self):
         return self.name
@@ -13,9 +13,9 @@ class task:
     def getDate(self):
         return self.date
 
-    def getRemind(self):
-        return self.remind
+    def getCategory(self):
+        return self.category
 
     def display(self):
-        return '%s %s %s' % (self.getName(), self.getDate(), self.getRemind())
+        return '%s %s %s' % (self.getName(), self.getDate(), self.getCategory())
         

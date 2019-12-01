@@ -1,24 +1,26 @@
 import functions as fn
-
-#main loop variable
-main = True
-
-#stop function for program
-def stop():
-    global main
-    main = False
+import windowLayout as wl
 
 commandList = {
     'help' : fn.printHelp,
     'add' : fn.addTask,
-    'search' : fn.searchTask,
-    'stop' : stop
+    'search' : fn.searchTask
     }
 
 #main
-print('Welcome to task scheduler')
-while(main):
-    print('Enter help for list of commands')
-    print('Enter stop to stop program')
-    commandList.get(input('COMMAND>'), lambda : print('Command not recognized\n--------'))()
-print('Task scheduler closing')
+while True:
+    event, values = wl.taskSchedulerWindow.Read()
+    if event is None:
+        break
+    if event == 'Add Task':
+        fn.writeTask(values['name'], values['date'], values['category'])
+        #TODO reset input boxes
+    if event == 'Search':
+        if values['nameSearch']:
+            readTaskName(values['parameter'])
+        elif values['dateSearch']:
+            readTaskDate(values['parameter'])
+        else:
+            readTaskCategory(values['parameter'])
+    print('loop')
+wl.taskSchedulerWindow.close()
