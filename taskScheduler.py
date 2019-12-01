@@ -1,26 +1,24 @@
 import functions as fn
 import windowLayout as wl
 
-commandList = {
-    'help' : fn.printHelp,
-    'add' : fn.addTask,
-    'search' : fn.searchTask
-    }
-
-#main
+#main loop
 while True:
     event, values = wl.taskSchedulerWindow.Read()
+    wl.taskSchedulerWindow['addOutput'].update('')
     if event is None:
         break
     if event == 'Add Task':
         fn.writeTask(values['name'], values['date'], values['category'])
-        #TODO reset input boxes
+        wl.taskSchedulerWindow['addOutput'].update('~Task added successfully!~')
+        wl.taskSchedulerWindow['name'].update('')
+        wl.taskSchedulerWindow['date'].update('')
+        wl.taskSchedulerWindow['category'].update('')
     if event == 'Search':
         if values['nameSearch']:
-            readTaskName(values['parameter'])
+            wl.taskSchedulerWindow['searchReturn'].update(fn.readTaskName(values['parameter']))
         elif values['dateSearch']:
-            readTaskDate(values['parameter'])
+            wl.taskSchedulerWindow['searchReturn'].update(fn.readTaskDate(values['parameter']))
         else:
-            readTaskCategory(values['parameter'])
-    print('loop')
+            wl.taskSchedulerWindow['searchReturn'].update(fn.readTaskCategory(values['parameter']))
+            
 wl.taskSchedulerWindow.close()

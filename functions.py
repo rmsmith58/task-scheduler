@@ -9,78 +9,36 @@ def writeTask(title, date, remind):
     
 #printd all tasks wirh matching due date
 def readTaskDate(date):
-    output = ''
+    output = ['Name:   Date:   Category:']
     files = os.listdir('tasks')
     for filename in files:
         temp = p.load(open('tasks\%s' % filename, 'rb'))
         if temp.getDate() == date:
-            output += temp.display()
-            output += '\n'
-    if output == '':
-        output += 'No matching tasks found'
-    else:
-        output = 'Found tasks:\n' + output    
-    print(output + '--------')
+            output.append(temp.display())
+    if len(output) == 1:
+        output.append('No matching tasks found')
+    return output    
 
 #prints all tasks with matching reminder date
 def readTaskCategory(category):
-    output = ''
+    output = ['Name:   Date:   Category:']
     files = os.listdir('tasks')
     for filename in files:
         temp = p.load(open('tasks\%s' % filename, 'rb'))
         if temp.getCategory() == category:
-            output += temp.display()
-            output += '\n'
-    if output == '':
-        output += 'No matching tasks found'
-    else:
-        output = 'Found tasks:\n' + output
-    print(output + '--------')
+            output.append(temp.display())
+    if len(output) == 1:
+        output.append('No matching tasks found')
+    return output
 
 #prints all tasks with matching name
 def readTaskName(name):
-    output = ''
+    output = ['Name:   Date:   Category:']
     files = os.listdir('tasks')
     for filename in files:
         temp = p.load(open('tasks\%s' % filename, 'rb'))
         if temp.getName() == name:
-            output += temp.display()
-            output += '\n'
-    if output == '':
-        output += 'No matching tasks found'
-    else:
-        output = 'Found tasks:\n' + output
-    print(output + '--------')
-
-#print list of commands
-def printHelp():
-    print('help - list commands')
-    print('add - add task')
-    print('search - list tasks')
-    print('stop - stop program\n--------')
-
-#get input and call writeTask with that input
-def addTask():
-    print('Enter name of task')
-    name = input('NAME>')
-    print('Enter task date (MM/DD/YYYY)')
-    taskDate = input('DATE>')
-    print('Enter date for reminder (MM/DD/YYYY)')
-    remindDate = input('DATE>')
-
-    writeTask(name, taskDate, remindDate)
-
-    print('Task added successfully\n--------')
-    
-#run readTask with given search parameter and term
-def searchTask():
-    print('Enter search parameter: Name, date, or reminder')
-    key = input('PARAMETER>')
-    if key.lower() == 'name':
-        readTaskName(input('Enter search term\nNAME>'))
-    elif key.lower() == 'date':
-        readTaskDate(input('Enter search term\nDATE>'))
-    elif key.lower() == 'reminder':
-        readTaskRemind(input('Enter search term\nREMINDER>'))
-    else:
-        print('Unrecognized search parameter')
+            output.append(temp.display())
+    if len(output) == 1:
+        output[0] = 'No matching tasks found'
+    return output
