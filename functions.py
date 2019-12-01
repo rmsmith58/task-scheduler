@@ -1,11 +1,13 @@
 import pickle as p
 import os
 import taskClass as t
+import random
 
 #write task class to file
 def writeTask(title, date, remind):
+    random.seed()
     tempTask = t.task(title, date, remind)
-    p.dump(tempTask, open(('tasks\%s.p' % tempTask.getName()), 'wb'))
+    p.dump(tempTask, open(('tasks\%s.p' % random.randrange(999999999999)), 'wb'))
     
 #printd all tasks wirh matching due date
 def readTaskDate(date):
